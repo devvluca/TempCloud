@@ -36,7 +36,7 @@
     .container {
       max-width: 480px;
       margin: 32px auto 0 auto;
-      background: #fff;
+      background: rgba(255,255,255,0.88); /* leve transparência */
       border-radius: 18px;
       box-shadow: 0 2px 24px 0 rgba(30,56,128,0.10);
       padding: 24px 16px 32px 16px;
@@ -120,6 +120,7 @@
         min-height: calc(100vh - 24px);
         /* Garante que o container fique todo visível e arredondado */
         box-sizing: border-box;
+        background: rgba(255,255,255,0.88); /* mantém transparência no mobile */
       }
       .cards-grid {
         grid-template-columns: 1fr 1fr;
