@@ -107,6 +107,65 @@
       letter-spacing: 0.04em;
       user-select: none;
     }
+    /* Modal de alerta */
+    .modal-alerta {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.38);
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s;
+    }
+    .modal-alerta.ativo {
+      display: flex;
+    }
+    .modal-alerta-conteudo {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 32px rgba(200,0,0,0.18);
+      border: 2.5px solid #e53935;
+      padding: 32px 22px 22px 22px;
+      max-width: 90vw;
+      text-align: center;
+      color: #b71c1c;
+      font-size: 1.18em;
+      font-weight: 600;
+      position: relative;
+      animation: alertaPop 0.18s cubic-bezier(.4,1.4,.6,1);
+    }
+    .modal-alerta-icone {
+      font-size: 2.2em;
+      display: block;
+      margin-bottom: 10px;
+      animation: alertaBlink 0.9s infinite alternate;
+      line-height: 1;
+    }
+    @keyframes alertaPop {
+      0% { transform: scale(0.8);}
+      100% { transform: scale(1);}
+    }
+    @keyframes alertaBlink {
+      0% { opacity: 1; }
+      60% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
+    .modal-alerta-botao {
+      margin-top: 18px;
+      background: #e53935;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 28px;
+      font-size: 1em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .modal-alerta-botao:active {
+      background: #b71c1c;
+    }
     @media (max-width: 480px) {
       body::before {
         background: #f2f6fa url('mobile_wallpaper_server_room.jpg') no-repeat center center fixed;
@@ -158,9 +217,21 @@
       </div>
     </div>
     <canvas id="grafico-temperatura" height="160" style="max-width:100%;"></canvas>
+    <!-- Footer agora dentro do container -->
+    <div class="footer-discreto">
+      Luca Aguiar <br> Cadeira de Sistemas Embarcados <br> Prof. Cláudio
+    </div>
   </div>
-  <div class="footer-discreto">
-    Luca Aguiar <br> Cadeira de Sistemas Embarcados <br> Prof. Cláudio
+  <!-- Modal de alerta -->
+  <div class="modal-alerta" id="modal-alerta">
+    <div class="modal-alerta-conteudo">
+      <span class="modal-alerta-icone">⚠️</span>
+      <span id="modal-alerta-msg">
+        <!-- Mensagem será preenchida via JS -->
+      </span>
+      <br>
+      <button class="modal-alerta-botao" onclick="fecharModalAlerta()">OK</button>
+    </div>
   </div>
 
   <!-- Chart.js -->
@@ -177,6 +248,19 @@
 
     let chart;
     let ultimosValores = []; // [{value: x, time: y}]
+    let alertaExibido = false;
+
+    // Modal de alerta
+    function mostrarModalAlerta(msg) {
+      const modal = document.getElementById('modal-alerta');
+      document.getElementById('modal-alerta-msg').textContent = msg;
+      modal.classList.add('ativo');
+      alertaExibido = true;
+    }
+    function fecharModalAlerta() {
+      document.getElementById('modal-alerta').classList.remove('ativo');
+      alertaExibido = false;
+    }
 
     async function fetchValoresDoMinuto() {
       const agora = (new Date()).toISOString();
@@ -219,6 +303,14 @@
         tempMaxElem.textContent = max !== "--" ? max + unidade : "--";
         tempMinElem.textContent = min !== "--" ? min + unidade : "--";
         tempMediaElem.textContent = media !== "--" ? media + unidade : "--";
+
+        // Alerta de temperatura
+        if (typeof atual === "number" && atual > 40 && !alertaExibido) {
+          mostrarModalAlerta("Alerta crítico: A temperatura ultrapassou 40°C! Por favor, verifique imediatamente as condições da sala de servidores.");
+        }
+        if (typeof atual === "number" && atual <= 40 && alertaExibido) {
+          fecharModalAlerta();
+        }
 
         // Atualiza o gráfico
         atualizarGrafico();
