@@ -45,6 +45,9 @@
       align-items: center;
       position: relative;
       z-index: 1;
+      /* Garante que o container nunca corte no rodapé */
+      min-height: calc(100vh - 64px);
+      box-sizing: border-box;
     }
     h1 {
       font-size: 1.38em;
@@ -62,6 +65,7 @@
       width: 100%;
       margin-bottom: 32px;
     }
+    /* Animação de "pop" nos cards */
     .card {
       background: #f5f9ff;
       border-radius: 12px;
@@ -72,6 +76,11 @@
       flex-direction: column;
       align-items: center;
       min-width: 0;
+      transition: transform 0.13s cubic-bezier(.4,1.4,.6,1);
+      cursor: pointer;
+    }
+    .card:active {
+      transform: scale(1.07);
     }
     .card-label {
       font-size: 1em;
@@ -105,8 +114,12 @@
       }
       .container {
         max-width: 100vw;
-        border-radius: 0;
+        border-radius: 18px;
         padding: 18px 4px 24px 4px;
+        margin: 12px 6px 12px 6px;
+        min-height: calc(100vh - 24px);
+        /* Garante que o container fique todo visível e arredondado */
+        box-sizing: border-box;
       }
       .cards-grid {
         grid-template-columns: 1fr 1fr;
@@ -262,6 +275,18 @@
     document.addEventListener("DOMContentLoaded", () => {
       atualizarDashboard();
       setInterval(atualizarDashboard, 1000); // Real time: 1 segundo
+
+      // Pop nos cards
+      document.querySelectorAll('.card').forEach(card => {
+        // Para mouse
+        card.addEventListener('mousedown', () => card.classList.add('touch-pop'));
+        card.addEventListener('mouseup', () => card.classList.remove('touch-pop'));
+        card.addEventListener('mouseleave', () => card.classList.remove('touch-pop'));
+        // Para touch
+        card.addEventListener('touchstart', () => card.classList.add('touch-pop'), {passive:true});
+        card.addEventListener('touchend', () => card.classList.remove('touch-pop'));
+        card.addEventListener('touchcancel', () => card.classList.remove('touch-pop'));
+      });
     });
   </script>
   <!-- PWA: registra o service worker -->
