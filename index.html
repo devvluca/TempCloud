@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Monitoramento Sala de Servidores Cloud</title>
   <!-- PWA: Manifest e ícone -->
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icone.png">
+  <link rel="manifest" href="PWA/manifest.json">
+  <link rel="apple-touch-icon" href="img/icone.png">
   <meta name="theme-color" content="#326bf3">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -29,7 +29,7 @@
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       z-index: 0;
-      background: #f2f6fa url('wallpaper_server_room.jpg') no-repeat center center fixed;
+      background: #f2f6fa url('img/wallpaper_server_room.jpg') no-repeat center center fixed;
       background-size: cover;
       pointer-events: none;
     }
@@ -168,7 +168,7 @@
     }
     @media (max-width: 480px) {
       body::before {
-        background: #f2f6fa url('mobile_wallpaper_server_room.jpg') no-repeat center center fixed;
+        background: #f2f6fa url('img/mobile_wallpaper_server_room.jpg') no-repeat center center fixed;
         background-size: cover;
       }
       .container {
@@ -386,7 +386,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js');
+        navigator.serviceWorker.register('PWA/service-worker.js');
       });
     }
   </script>
