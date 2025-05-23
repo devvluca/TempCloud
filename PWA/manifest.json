@@ -1,8 +1,8 @@
 {
   "name": "Monitoramento Sala de Servidores Cloud",
-  "short_name": "Monitoramento Cloud",
+  "short_name": "TempCloud",
   "description": "Monitoramento Sala de Servidores Cloud em Tempo Real",
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f2f6fa",
   "theme_color": "#326bf3",

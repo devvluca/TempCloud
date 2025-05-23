@@ -1,10 +1,10 @@
 const CACHE_NAME = "monitoramento-cloud-v1";
 const toCache = [
-  "./",
-  "./index.html",
-  "./manifest.json",
-  "./icone.png",
-  "./script.js",
+  "/",
+  "/index.html",
+  "/PWA/manifest.json",
+  "/img/icone.png",
+  "/script.js",
   "https://cdn.jsdelivr.net/npm/chart.js"
 ];
 
