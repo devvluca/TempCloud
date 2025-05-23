@@ -15,8 +15,8 @@ contador = 0
 def enviar_dados():
     global contador
     contador += 1
-    # Uma vez a cada 10 envios, gera uma temperatura > 40
-    if contador % 10 == 0:
+    # Uma vez a cada 5 envios, gera uma temperatura > 40
+    if contador % 5 == 0:
         temperatura_atual = round(random.uniform(40.1, 42.0), 2)
     else:
         temperatura_atual = round(random.uniform(24.0, 26.0), 2)

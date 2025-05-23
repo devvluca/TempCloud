@@ -7,7 +7,8 @@
   <!-- PWA: Manifest e ícone -->
   <link rel="manifest" href="/PWA/manifest.json">
   <link rel="apple-touch-icon" href="/img/icone.png">
-  <meta name="theme-color" content="#326bf3">
+  <!-- Notch bar: cinza clarinho (quase transparente) -->
+  <meta name="theme-color" content="#f7fafd">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Monitoramento Cloud">
@@ -99,13 +100,14 @@
       margin-bottom: 0;
     }
     .footer-discreto {
-      font-size: 0.85em;
+      font-size: 1.08em; /* aumentado */
       color: #b0b1be;
       margin: 24px 0 10px 0;
       text-align: center;
       font-style: italic;
       letter-spacing: 0.04em;
       user-select: none;
+      line-height: 1.6; /* mais espaçado */
     }
     /* Modal de alerta */
     .modal-alerta {
@@ -189,8 +191,9 @@
       .card-value { font-size: 1.1em; }
       h1 { font-size: 1.05em; }
       .footer-discreto {
-        font-size: 0.8em;
+        font-size: 1em; /* aumentado no mobile também */
         margin: 18px 0 6px 0;
+        line-height: 1.5;
       }
     }
   </style>
