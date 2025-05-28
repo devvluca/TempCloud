@@ -4,8 +4,8 @@
   "description": "Monitoramento Sala de Servidores Cloud em Tempo Real",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f7fafd",
-  "theme_color": "#f7fafd",
+  "background_color": "#1542a0",
+  "theme_color": "#1542a0",
   "icons": [
     {
       "src": "/img/icone.png",
